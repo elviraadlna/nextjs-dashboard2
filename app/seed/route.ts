@@ -80,7 +80,8 @@ async function seedCustomers(sql: any) {
   return insertedCustomers;
 }
 
-async function seedRevenue() {
+// PERBAIKAN DI SINI: Tambahkan (sql: any)
+async function seedRevenue(sql: any) {
   await sql`
     CREATE TABLE IF NOT EXISTS revenue (
       month VARCHAR(4) NOT NULL UNIQUE,
@@ -103,11 +104,12 @@ async function seedRevenue() {
 
 export async function GET() {
   try {
+    // Di sini kita menggunakan transaksi agar jika satu gagal, semua batal
     const result = await sql.begin(async (sql) => {
       await seedUsers(sql);
       await seedCustomers(sql);
       await seedInvoices(sql);
-      await seedRevenue(sql);
+      await seedRevenue(sql); // Sekarang sudah cocok dengan definisi di atas
     });
 
     return Response.json({ message: 'Database seeded successfully' });
