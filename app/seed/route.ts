@@ -55,7 +55,7 @@ async function seedInvoices(sql: any) {
   return insertedInvoices;
 }
 
-async function seedCustomers() {
+async function seedCustomers(sql: any) {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   await sql`
