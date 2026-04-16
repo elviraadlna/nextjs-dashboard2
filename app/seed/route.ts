@@ -108,7 +108,7 @@ export async function GET() {
       await seedCustomers(sql);
       await seedInvoices(sql);
       await seedRevenue(sql);
-  });
+    });
 
     return Response.json({ message: 'Database seeded successfully' });
   } catch (error) {
